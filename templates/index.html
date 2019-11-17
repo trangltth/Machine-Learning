@@ -29,19 +29,20 @@
   <div class="container-fluid">
     <div class="row">
       <nav class="col-md-2 bg-light sidebar">
-        <div class="row">
+        
           {% for category in categories %}
+          <div class="row"> 
           <div class="pt-4 col-md-1">
-            <i class="fas fa-mobile-alt ">
+            <i class="fas fa-arrow-circle-right ">
             </i>
           </div>
           <div class="col pt-4 pl-0">
-            <a class="pr-0 pl-2 " href="#">
-              {{ category }}
+            <a class="pr-0 pl-2 " href="{{category.product_link}}">
+              {{ category.category_name }}
             </a>
           </div>
+          </div>
           {% endfor %}
-        </div>
       </nav>
 
       <main class="ml-auto col-10 pt-3 px-4">

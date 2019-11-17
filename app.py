@@ -10,16 +10,26 @@ data = json.load(f)
 all_products = []
 all_categories = []
 
-all_categories = data['category']
+data_category = data['category']
+data_product = data['product']
 
-for item in data:
-    for i in range(len(data[item])):
+for item in data_category:
+    for i in range(len(data_category[item])):
+      if(i >= len(all_categories)):
+        temp = dict()
+        temp[item] = data_category[item][i]
+        all_categories.append(temp)
+      else:
+        all_categories[i][item] = data_category[item][i] 
+
+for item in data_product:
+    for i in range(len(data_product[item])):
       if(i >= len(all_products)):
         temp = dict()
-        temp[item] = data[item][i]
+        temp[item] = data_product[item][i]
         all_products.append(temp)
       else:
-        all_products[i][item] = data[item][i] 
+        all_products[i][item] = data_product[item][i] 
 
 @app.route('/')
 def index():
