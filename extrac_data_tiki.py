@@ -23,7 +23,6 @@ titles, images, price, description = [],[],[],[]
 short_title, sub_category, tiki_now, review, rating = [],[],[],[],[]
 
 main_tag = bs.find('div',{"class":"product-box-list"})
-# category.append(main_tag["data-impress-list-title"])
 
 for tag in main_tag.findAll('div',{'class':'product-item'}):
   cover = tag.a.div  
@@ -45,10 +44,3 @@ data = {"product":{"title":titles, "price": price, "image":images,
 file = open("tiki_data","w")
 
 json.dump(data,file)
-
-file = open("tiki_data","r")
-
-data_read = json.load(file)
-
-# for item in data_read:
-#   print(data_read)
