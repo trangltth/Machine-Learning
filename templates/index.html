@@ -28,8 +28,7 @@
 
   <div class="container-fluid">
     <div class="row">
-      <nav class="col-md-2 bg-light sidebar">
-        
+      <nav class="col-md-2 bg-light sidebar">        
           {% for category in categories %}
           <div class="row"> 
           <div class="pt-4 col-md-1">
@@ -37,8 +36,19 @@
             </i>
           </div>
           <div class="col pt-4 pl-0">
-            <a class="pr-0 pl-2 " href="{{category.product_link}}">
-              {{ category.category_name }}
+            <a class="pr-0 pl-2 " category-id = "{{ category[0] }}" href="{{ url_for('get_child_category', category_id = category[0]) }}">
+              {{ category[1] }}
+              {% if parent_id == category[0] %}
+                <ul class="pl-3">
+                  {% for child_category in child_categories %} 
+                    <li>
+                        <a href="#">
+                            {{ child_category[1] }}
+                        </a>
+                    </li>  
+                  {% endfor %}
+                </ul>
+              {% endif %}
             </a>
           </div>
           </div>
@@ -52,17 +62,17 @@
               {% for product in products %}
               <div class="col-3">
                 <div class="card mb-4" style="width: 12rem;">
-                  <img class="card-img-top" src="{{ product.image }}">
+                  <img class="card-img-top" src="{{ product[3] }}">
                   <div class="card-body">
-                    <h6 class="card-title" data-toggle="tooltip" data-placement="bottom" title="{{ product.title }}" style="cursor:pointer">{{ product.short_title }}</h6>
+                    <h6 class="card-title" data-toggle="tooltip" data-placement="bottom" title="{{ product[1] }}" style="cursor:pointer">{{ product[4] }}</h6>
                     <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="{{ product.rating }}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                      <div class="progress-bar" role="progressbar" style="width:{{ product[8]*100 }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                       </div>
                     </div>
-                    <p class="card-text">{{ product.review }}</p>
+                    <p class="card-text">{{ product[7] }} (nhận xét)</p>
                     <p class="card-text">
-                      {{ product.price }}
-                      <img class="{{ product.tiki_now }}" src="https://hotro.tiki.vn/hc/article_attachments/360018257591/tikinow-lgoo.jpg" style="width: 60px; display:none"> </img>
+                      {{ product[2] }}
+                      <img class="{% if product[6] %} tikicon {% endif %}" src="https://hotro.tiki.vn/hc/article_attachments/360018257591/tikinow-lgoo.jpg" style="width: 60px; display:none"> </img>
                     </p>
                   </div>
                 </div>

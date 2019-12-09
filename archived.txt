@@ -1,0 +1,26 @@
+
+<script>
+    var catalogPaging = {
+        pageNum: 1,
+        limitOnPage: 48,
+        totalResults: 7247    };
+</script> 
+
+category_id = 1883
+
+# get numpage
+
+ html = urlopen(self.category_link,timeout=1000)
+      bs = BeautifulSoup(html.read(),"html.parser")
+
+      box_tag = bs.find_all("div",{"class":"product-listing"})
+      max_pages = 0
+      
+  for item in box_tag:
+        script_tag = item.select("div.product-box.no-mg > script")[0].get_text()
+        page_info = re.sub("([a-zA-Z\{\}\:\s\;]*)|([a-z\=\s]*)","",script_tag).split(",")
+  # max_pages = (int(page_info[2]) // int(page_info[1])) + (int(page_info[2]) % int(page_info[1]) > 0)
+      
+      for page in range(1,max_pages+1):
+        url_product = self.category_link + "&page=" + str(page)
+        self.extract_product(url_product,conn)
