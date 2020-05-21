@@ -1,0 +1,9 @@
+##### Module #####
+- Example: 
+    import sys
+    sys.path.append('/home/trang/working/projects/Machine-Learning/data_scrapping/')
+- Due to Vscode as known as runtime application. So when running testing in a specific file and call to parent 
+Module/packages or another packages. We should add import sys.path in the top file.
+- For whole project, we just run the main file and main file should in root direction, this makes python treat the
+current direction in list of modules in sys.path. When root direction is inserted, every files of project can call all packages
+even they are in different directions. 

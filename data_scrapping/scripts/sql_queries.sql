@@ -20,7 +20,7 @@ CREATE TABLE categories(
 ALTER TABLE products 
   ADD COLUMN detail json;
 
-#-- 2019-12-03
+-- 2019-12-03
 
 CREATE TABLE category_product_detail(
   category_id INTEGER,
@@ -30,7 +30,7 @@ CREATE TABLE category_product_detail(
   PRIMARY KEY(product_id, category_id)
 );
 
--- Copy products data inTO category_product_detail
+-- Copy products data into category_product_detail
 
 INSERT INTO category_product_detail(product_id, category_id)
 SELECT product_id, category_id
@@ -50,7 +50,7 @@ AS
           , CURRENT_TIMESTAMP as updated_date
   FROM products;
 
---# 2019-12-04
+-- 2019-12-04
 ALTER TABLE products
 rename TO products_archived
 
@@ -76,14 +76,19 @@ ALTER TABLE category_product_detail OWNER TO trang;
 ALTER TABLE suppliers OWNER TO trang;
 
 -- 2020-01-05
-ALTER TABLE suppliers(
-  supplier_id INTEGER,
-  supplier_name VARCHAR(5000),
-  supplier_extra_information jsonb,
-  PRIMARY KEY (supplier_id)
-);
+--PATTERN: 
+-- TABLE suppliers(
+--   supplier_id INTEGER,
+--   supplier_name VARCHAR(5000),
+--   supplier_extra_information jsonb,
+--   PRIMARY KEY (supplier_id)
+-- );
 
-ALTER TABLE supplier_collections(
+ALTER TABLE suppliers
+  DROP COLUMN url,
+  ADD COLUMN supplier_extra_information jsonb;
+
+CREATE TABLE supplier_collections(
   collection_id INTEGER,
   collection_name VARCHAR(5000),
   supplier_id INTEGER,
@@ -91,11 +96,11 @@ ALTER TABLE supplier_collections(
   PRIMARY KEY (collection_id, supplier_id)
 );
 
-ALTER TABLE supplier_product_mapping(
+CREATE TABLE supplier_product_mapping(
   supplier_id INTEGER,
   product_id INTEGER,
   collection_id INTEGER,
-  product_extra_information jsonb
+  product_extra_information jsonb,
   PRIMARY KEY(supplier_id, product_id, collection_id)
 );
 
@@ -127,8 +132,35 @@ CREATE TABLE products_log(
   rating NUMERIC(2,1),
   brand VARCHAR(500),
   category_id INTEGER,
-  created_date TIMESTAMP CURRENT_TIMESTAMP,
+  created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (product_id, category_id));
-)
+
+
+-- 2020-01-13
+
+ALTER TABLE categories
+  ADD COLUMN category_link text,
+  ADD COLUMN is_deleted BOOLEAN DEFAULT FALSE,
+  ADD COLUMN created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  ADD COLUMN updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+CREATE TABLE categories_log(
+  category_log_id SERIAL,
+  category_id INTEGER,
+  category_name VARCHAR(500),
+  category_link TEXT,
+  parent_id INTEGER,
+  created_date TIMESTAMP,
+  is_deleted BOOLEAN,
+  created_date_log TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(category_log_id)
+);
+
+INSERT INTO categories_log(category_id, category_name, category_link, parent_id, is_deleted, created_date)
+SELECT category_id, category_name, category_link, parent_id, is_deleted, updated_date
+FROM categories;
+
+
+
 
 

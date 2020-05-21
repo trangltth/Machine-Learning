@@ -2,11 +2,11 @@ from flask import Flask, render_template, render_template_string
 import json
 from packages.object_scrapping import product, category
 import psycopg2
-import app
+import app, static.tiki_information as tiki_info
 # from flask_menu import Menu, register_menu
 
 
-conn = psycopg2.connect("dbname=tiki_scrapping port=5432 user=trang password=P@ssw0rd123")
+conn = psycopg2.connect(tiki_info.db_connection)
 data_category = category.category().get_parent_category(conn)
 app = Flask(__name__, template_folder="templates")
 

@@ -7,7 +7,17 @@ product_collection_api = 'https://seller-store-api.tiki.vn/collection-products?c
 prodoct_without_collection_api = 'https://tiki.vn/api/v2/seller/stores/url_slug/products'
 
 #################### DB connection string ####################
-db_connection = "dbname=tiki_scrapping port=5432 user=trang password=P@ssw0rd123"
+db_connection = 'dbname=tiki_scrapping port=5433 user=trang password=P@ssw0rd123'
 
 #################### HTTP ####################
 url_open_timeout = 1000
+
+#################### url ####################
+tiki_url = 'https://tiki.vn/'
+
+
+
+
+
+
+
