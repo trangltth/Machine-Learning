@@ -1,5 +1,5 @@
 from requests import get
-from static import tiki_information
+from constants import tiki_information
 import re
 from packages.object_scrapping import supplier_collection
 

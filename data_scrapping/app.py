@@ -2,7 +2,7 @@ from flask import Flask, render_template, render_template_string
 import json
 from packages.object_scrapping import product, category
 import psycopg2
-import app, static.tiki_information as tiki_info
+import app, constants.tiki_information as tiki_info
 # from flask_menu import Menu, register_menu
 
 
