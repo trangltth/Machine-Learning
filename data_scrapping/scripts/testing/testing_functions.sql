@@ -1,0 +1,189 @@
+﻿--v1
+-- drop function if exists findvalueinsystem;
+-- create function findvalueinsystem() returns bool
+-- as
+-- 'declare
+-- 	ptable_name character(100);
+-- 	cur1 cursor for select table_name from information_schema.tables;
+-- begin
+--  	select 1;
+-- 	return true;
+-- end'
+-- language plpgsql;
+
+--v2
+-- drop function if exists findvalueinsystem;
+-- create function findvalueinsystem() returns text
+-- as 
+-- 'declare
+-- 	ptable_name character(100);
+-- 	pcolumn_name character(100);
+-- 	ccolumn_name refcursor;
+-- 	ctable_name cursor for select table_name from information_schema.tables;
+-- begin
+-- 	open ctable_name;
+--  	fetch ctable_name into ptable_name;
+--  	ptable_name := trim(ptable_name);
+-- 	open ccolumn_name for execute format(''select column_name from information_schema.columns where table_name = trim(%L)  and (data_type like %L or data_type like %L)'', ptable_name, ''%text%'', ''%character%'') ;
+-- 	fetch ccolumn_name into pcolumn_name;
+-- 	pcolumn_name := trim(pcolumn_name);
+-- -- 	execute format('' ptable_name := %L, pcolumn_name := %L from %L where %L like %L'', ptable_name, pcolumn_name, ptable_name, pcolumn_name, ''%pass%'');
+-- 	if exists (select pcolumn_name) then	
+-- 		execute format('' (select %L from %s where %s like %L)'', ptable_name, ptable_name, pcolumn_name, ''%pass%'') into ptable_name;
+-- 	end if;
+-- 	return ptable_name;
+-- end'
+-- language plpgsql;
+-- 
+-- select findvalueinsystem();
+
+
+--v3
+-- drop function if exists findvalueinsystem;
+-- create function findvalueinsystem() returns text
+-- as 
+-- 'declare
+-- 	ptable_name character(100);
+-- 	pcolumn_name character(100);
+-- 	ccolumn_name refcursor;
+-- 	ctable_name cursor for select table_name from information_schema.tables;
+-- begin
+-- 	open ctable_name;
+--  	fetch ctable_name into ptable_name;
+--  	ptable_name := trim(ptable_name);
+-- 	open ccolumn_name for execute format(''select column_name from information_schema.columns where table_name = trim(%L)  and (data_type like %L or data_type like %L)'', ptable_name, ''%text%'', ''%character%'') ;
+-- 	fetch ccolumn_name into pcolumn_name;
+-- 	pcolumn_name := trim(pcolumn_name);
+-- 	if (pcolumn_name is not null) then	
+-- 		execute format('' (select %L from %s where %s like %L)'', ptable_name, ptable_name, pcolumn_name, ''%pass%'') into ptable_name;
+-- 		return ptable_name;
+-- 	end if;
+-- 	return '''';
+-- end'
+-- language plpgsql;
+
+--v4
+drop function if exists findvalueinsystem;
+-- create function findvalueinsystem() returns setof text
+-- as 
+-- 'declare
+-- 	ptable_name character(100);
+-- 	pcolumn_name character(100);
+-- 	ccolumn_name refcursor;
+-- 	sctable_name refcursor;
+-- 	ptype character(20);
+-- 	ctable_name cursor for select table_name from information_schema.tables;
+-- begin
+-- 	for ctable in ctable_name loop	
+-- 		ptype := (select pg_typeof(ctable));
+-- 		ptable_name := cast(regexp_match(cast(ctable as text), ''(\w+)'') as text);
+-- 		declare ccolumn_name cursor for select column_name from information_schema.columns where (data_type like ''%char%'' or data_type like ''%text%'') 
+-- 						and table_schema = ''pg_catalog'' and table_name = ptable_name;
+-- 		for ccolumn in ccolumn_name loop
+-- 			pcolumn_name := cast(regexp_match(cast (ccolumn as text), ''\w+'') as text)
+-- 			return next pcolumn_name;
+-- 		end loop;
+-- 	end loop;
+-- 	 	
+-- 	return;
+-- end'
+-- language plpgsql;
+-- 
+-- select findvalueinsystem();
+
+-- v5
+-- create function findvalueinsystem() returns setof text
+-- as 
+-- 'declare
+-- 	ptable_name character(100);
+-- 	pcolumn_name character(100);
+-- 	sctable_name refcursor;
+-- 	ptype character(20);
+-- 	ctable_name cursor for select table_name from information_schema.tables;
+-- 	ccolumn_name cursor (fptable_name text) for select column_name from information_schema.columns where (data_type like ''%char%'' or data_type like ''%text%'')
+-- 							and table_schema = ''pg_catalog'' and table_name = fptable_name;
+-- begin
+-- 	for ctable in ctable_name loop	
+-- 		ptype := (select pg_typeof(ctable));
+-- 		ptable_name := (select (regexp_match(cast(ctable as text), ''(\w+)''))[1]);
+-- 		for ccolumn in ccolumn_name(ptable_name) loop
+-- 			pcolumn_name := (Select (regexp_match(cast (ccolumn as text), ''\w+''))[1]);
+-- 			if exists (select format('' 1 from %L where %L like %s '', ptable_name, pcolumn_name, ''%passfile%''))	
+-- 			then
+-- 				return next (ptable_name || ''-'' || pcolumn_name);
+-- 			end if;
+-- 		end loop;
+-- 		
+-- 	end loop;
+-- 	 	
+-- 	return;
+-- end'
+-- language plpgsql;
+
+-- v6
+-- 
+-- create function findvalueinsystem(finding_text text) returns setof text
+-- as 
+-- 'declare
+-- 	ptable_name character(100);
+-- 	pcolumn_name character(100);
+-- 	sctable_name refcursor;
+-- 	ptype character(20);
+-- 	ctable_name cursor for select table_name from information_schema.tables;
+-- 	ccolumn_name cursor (fptable_name text) for select column_name from information_schema.columns where (data_type like ''%char%'' or data_type like ''%text%'')
+-- 							and table_schema = ''pg_catalog'' and table_name = fptable_name;
+-- 	is_exists_finding_value smallint;
+-- begin
+-- 	for ctable in ctable_name loop	
+-- 		ptype := (select pg_typeof(ctable));
+-- 		ptable_name := (select (regexp_match(cast(ctable as text), ''(\w+)''))[1]);
+-- 		for ccolumn in ccolumn_name(ptable_name) loop
+-- 			pcolumn_name := (Select (regexp_match(cast (ccolumn as text), ''\w+''))[1]);
+-- 			execute format('' select 1 from %s where %s like %L'',ptable_name, pcolumn_name, ''%'' || finding_text || ''%'') into is_exists_finding_value;
+-- 			if (is_exists_finding_value is not null)	
+-- 			then
+-- 				return next (ptable_name || ''-'' || pcolumn_name);
+-- 			end if;
+-- 		end loop;
+-- 	end loop;
+-- 	 	
+-- 	return;
+-- end'
+-- language plpgsql;
+
+--v7
+-- create function findvalueinsystem(finding_text text) returns setof text
+-- as 
+-- 'declare
+-- 	ptable_name character(100);
+-- 	pcolumn_name character(100);
+-- 	sctable_name refcursor;
+-- 	ptype character(20);
+-- 	ctable_name cursor for select table_schema, table_name from information_schema.tables;
+-- 	ccolumn_name cursor (fptable_name text) for select column_name from information_schema.columns where (data_type like ''%char%'' or data_type like ''%text%'')
+-- 							and table_name = fptable_name;
+-- 	is_exists_finding_value smallint;
+-- begin
+-- 	for ctable in ctable_name loop	
+-- 		ptable_name := (select (regexp_match(cast(ctable as text), ''(\w+)''))[1]);
+-- 		for ccolumn in ccolumn_name(ptable_name) loop
+-- 			pcolumn_name := (Select (regexp_match(cast (ccolumn as text), ''\w+''))[1]);
+-- 			execute format('' select 1 from %s where %s like %L'',ptable_name, pcolumn_name, ''%'' || finding_text || ''%'') into is_exists_finding_value;
+-- 			if (is_exists_finding_value is not null)	
+-- 			then
+-- 				return next (ptable_name || ''-'' || pcolumn_name);
+-- 			end if;
+-- 			
+-- 		end loop;
+-- 		return next cast(( select ctable) as text);
+-- 		
+-- 	end loop;
+-- 	 	
+-- 	return;
+-- end'
+-- language plpgsql;
+
+-- select findvalueinsystem('pass');
+show ALL;
+
+

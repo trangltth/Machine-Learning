@@ -1,0 +1,399 @@
+{
+    "query": {
+        "url": "https://api.twitter.com/1.1/geo/reverse_geocode.json?lat=40.6943&long=-73.9249",
+        "type": "reverse_geocode",
+        "params": {
+            "accuracy": 0,
+            "coordinates": {
+                "coordinates": [
+                    -73.9249,
+                    40.6943
+                ],
+                "type": "Point"
+            },
+            "granularity": "neighborhood"
+        }
+    },
+    "result": {
+        "places": [
+            {
+                "id": "011add077f4d2da3",
+                "name": "Brooklyn",
+                "full_name": "Brooklyn, NY",
+                "country": "United States",
+                "country_code": "US",
+                "url": "https://api.twitter.com/1.1/geo/id/011add077f4d2da3.json",
+                "place_type": "city",
+                "attributes": {},
+                "bounding_box": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -74.041878,
+                                40.570842
+                            ],
+                            [
+                                -74.041878,
+                                40.739434
+                            ],
+                            [
+                                -73.855673,
+                                40.739434
+                            ],
+                            [
+                                -73.855673,
+                                40.570842
+                            ],
+                            [
+                                -74.041878,
+                                40.570842
+                            ]
+                        ]
+                    ]
+                },
+                "centroid": [
+                    -73.93950002939275,
+                    40.655138
+                ],
+                "contained_within": [
+                    {
+                        "id": "b6c2e04f1673337f",
+                        "name": "NEW YORK",
+                        "full_name": "NEW YORK",
+                        "country": "",
+                        "country_code": "",
+                        "url": "https://api.twitter.com/1.1/geo/id/b6c2e04f1673337f.json",
+                        "place_type": "admin",
+                        "attributes": {},
+                        "bounding_box": {
+                            "type": "Polygon",
+                            "coordinates": [
+                                [
+                                    [
+                                        -75.358407,
+                                        39.50181
+                                    ],
+                                    [
+                                        -75.358407,
+                                        42.177043
+                                    ],
+                                    [
+                                        -71.85615,
+                                        42.177043
+                                    ],
+                                    [
+                                        -71.85615,
+                                        39.50181
+                                    ],
+                                    [
+                                        -75.358407,
+                                        39.50181
+                                    ]
+                                ]
+                            ]
+                        },
+                        "centroid": [
+                            -74.51426031557503,
+                            40.842381
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "2ea89874d55827b7",
+                "name": "Bushwick",
+                "full_name": "Bushwick, Brooklyn",
+                "country": "United States",
+                "country_code": "US",
+                "url": "https://api.twitter.com/1.1/geo/id/2ea89874d55827b7.json",
+                "place_type": "neighborhood",
+                "attributes": {},
+                "bounding_box": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -73.941941,
+                                40.677082
+                            ],
+                            [
+                                -73.941941,
+                                40.709394
+                            ],
+                            [
+                                -73.8965,
+                                40.709394
+                            ],
+                            [
+                                -73.8965,
+                                40.677082
+                            ],
+                            [
+                                -73.941941,
+                                40.677082
+                            ]
+                        ]
+                    ]
+                },
+                "centroid": [
+                    -73.91638423741352,
+                    40.693238
+                ],
+                "contained_within": [
+                    {
+                        "id": "011add077f4d2da3",
+                        "name": "Brooklyn",
+                        "full_name": "Brooklyn, NY",
+                        "country": "United States",
+                        "country_code": "US",
+                        "url": "https://api.twitter.com/1.1/geo/id/011add077f4d2da3.json",
+                        "place_type": "city",
+                        "attributes": {},
+                        "bounding_box": {
+                            "type": "Polygon",
+                            "coordinates": [
+                                [
+                                    [
+                                        -74.041878,
+                                        40.570842
+                                    ],
+                                    [
+                                        -74.041878,
+                                        40.739434
+                                    ],
+                                    [
+                                        -73.855673,
+                                        40.739434
+                                    ],
+                                    [
+                                        -73.855673,
+                                        40.570842
+                                    ],
+                                    [
+                                        -74.041878,
+                                        40.570842
+                                    ]
+                                ]
+                            ]
+                        },
+                        "centroid": [
+                            -73.93950002939275,
+                            40.655138
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "27485069891a7938",
+                "name": "New York",
+                "full_name": "New York, NY",
+                "country": "United States",
+                "country_code": "US",
+                "url": "https://api.twitter.com/1.1/geo/id/27485069891a7938.json",
+                "place_type": "admin",
+                "attributes": {},
+                "bounding_box": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -74.255641,
+                                40.495865
+                            ],
+                            [
+                                -74.255641,
+                                40.91533
+                            ],
+                            [
+                                -73.699793,
+                                40.91533
+                            ],
+                            [
+                                -73.699793,
+                                40.495865
+                            ],
+                            [
+                                -74.255641,
+                                40.495865
+                            ]
+                        ]
+                    ]
+                },
+                "centroid": [
+                    -73.86770300366848,
+                    40.685776000000004
+                ],
+                "contained_within": [
+                    {
+                        "id": "94965b2c45386f87",
+                        "name": "New York",
+                        "full_name": "New York, USA",
+                        "country": "United States",
+                        "country_code": "US",
+                        "url": "https://api.twitter.com/1.1/geo/id/94965b2c45386f87.json",
+                        "place_type": "admin",
+                        "attributes": {},
+                        "bounding_box": {
+                            "type": "Polygon",
+                            "coordinates": [
+                                [
+                                    [
+                                        -79.76259,
+                                        40.477383
+                                    ],
+                                    [
+                                        -79.76259,
+                                        45.015851
+                                    ],
+                                    [
+                                        -71.777492,
+                                        45.015851
+                                    ],
+                                    [
+                                        -71.777492,
+                                        40.477383
+                                    ],
+                                    [
+                                        -79.76259,
+                                        40.477383
+                                    ]
+                                ]
+                            ]
+                        },
+                        "centroid": [
+                            -76.2146236146748,
+                            42.746617
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "94965b2c45386f87",
+                "name": "New York",
+                "full_name": "New York, USA",
+                "country": "United States",
+                "country_code": "US",
+                "url": "https://api.twitter.com/1.1/geo/id/94965b2c45386f87.json",
+                "place_type": "admin",
+                "attributes": {},
+                "bounding_box": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -79.76259,
+                                40.477383
+                            ],
+                            [
+                                -79.76259,
+                                45.015851
+                            ],
+                            [
+                                -71.777492,
+                                45.015851
+                            ],
+                            [
+                                -71.777492,
+                                40.477383
+                            ],
+                            [
+                                -79.76259,
+                                40.477383
+                            ]
+                        ]
+                    ]
+                },
+                "centroid": [
+                    -76.2146236146748,
+                    42.746617
+                ],
+                "contained_within": [
+                    {
+                        "id": "96683cc9126741d1",
+                        "name": "United States",
+                        "full_name": "United States",
+                        "country": "United States",
+                        "country_code": "US",
+                        "url": "https://api.twitter.com/1.1/geo/id/96683cc9126741d1.json",
+                        "place_type": "country",
+                        "attributes": {},
+                        "bounding_box": {
+                            "type": "Polygon",
+                            "coordinates": [
+                                [
+                                    [
+                                        -179.231086,
+                                        13.182335
+                                    ],
+                                    [
+                                        -179.231086,
+                                        71.434357
+                                    ],
+                                    [
+                                        179.859685,
+                                        71.434357
+                                    ],
+                                    [
+                                        179.859685,
+                                        13.182335
+                                    ],
+                                    [
+                                        -179.231086,
+                                        13.182335
+                                    ]
+                                ]
+                            ]
+                        },
+                        "centroid": [
+                            -98.99308143101959,
+                            36.890333500000004
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "96683cc9126741d1",
+                "name": "United States",
+                "full_name": "United States",
+                "country": "United States",
+                "country_code": "US",
+                "url": "https://api.twitter.com/1.1/geo/id/96683cc9126741d1.json",
+                "place_type": "country",
+                "attributes": {},
+                "bounding_box": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -179.231086,
+                                13.182335
+                            ],
+                            [
+                                -179.231086,
+                                71.434357
+                            ],
+                            [
+                                179.859685,
+                                71.434357
+                            ],
+                            [
+                                179.859685,
+                                13.182335
+                            ],
+                            [
+                                -179.231086,
+                                13.182335
+                            ]
+                        ]
+                    ]
+                },
+                "centroid": [
+                    -98.99308143101959,
+                    36.890333500000004
+                ],
+                "contained_within": []
+            }
+        ]
+    }
+}

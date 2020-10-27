@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import ETL_jobs, static.tiki_information as tiki_info
+import ETL_jobs, constants.tiki_information as tiki_info
 import psycopg2, json, sys, os, math
 from packages.object_scrapping import category
 import threading

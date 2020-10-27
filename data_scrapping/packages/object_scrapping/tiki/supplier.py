@@ -2,7 +2,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import re
 from requests import get
-from static import tiki_information as tiki_info
+from constants import tiki_information as tiki_info
 from packages.object_scrapping import supplier_collection
 
 class supplier:

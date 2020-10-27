@@ -1,6 +1,6 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-import json, re, static.tiki_information as tiki_info
+import json, re, constants.tiki_information as tiki_info
 from packages.object_scrapping import product, category
 import threading, math, time, sys, psycopg2, sys, multiprocessing, pickle
 from multiprocessing import Pool, current_process
