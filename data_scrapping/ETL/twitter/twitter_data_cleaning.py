@@ -2,50 +2,48 @@ import codecs, base64
 from ETL.twitter import twitter_data_extraction as te
 from urllib.parse import quote_plus
 from constants import twitter
-import json
+import json, psycopg2
 from string import Formatter
 
-def cleaning_tweet(raw_tweets):
-    raw_tweets_dict = dict(raw_tweets)
-    tweets_list = raw_tweets_dict['statuses']
+def clean_list_table_by_user_id(conn, extract_list, user_id):
+    extract_list = tuple(extract_list)
+    cur = conn.cursor()
+    try:
+        cur.execute('''update list_user_mapping 
+                        set is_deleted = true, deleted_at = current_timestamp 
+                        where user_id = %s and list_id not in %s and is_deleted = 'f'
+                        returning list_id, user_id;''', (user_id, extract_list))
+        conn.commit()
+        list_user_deleted = cur.fetchall()
+        print('list_user_mapping are deleted: ', list_user_deleted)
 
-    for tweet in tweets_list:
-        print(tweet)
+        cur.execute('''update lists
+                        set is_deleted = 't', deleted_at = current_timestamp
+                        where creator_id = %s and list_id not in %s and (is_deleted is null or is_deleted = 'f')
+                        returning list_id, creator_id;''', (user_id, extract_list))
+        conn.commit()
+        list_deleted = cur.fetchall()
+        print('lists are deleted: ', list_deleted)
+    except Exception as error:
+        print('Error - twitter_data_cleaning - clean_list_table_by_user_id: ', error)
+        conn.rollback()
+    finally:
+        cur.close()
 
-def get_all_users(raw_data_user):
-    raw_data_user_dict = dict(raw_data_user)
-    user_list = raw_data_user_dict['users']
-
-    for user in user_list:
-        print(user)
-
-
-# get all tweets in Data list
-# steps:
-# - get all members in Data list
-# - lookup members and retrieve tweets
-
-# Tasks:
-# add debug function
-
-if __name__ == '__main__':
-    get_all_member_param = 'list_id=1291391921135353857'
-    user_timeline_params = 'user_id=765548&count=200'
-    
-    # get all member in Data list
-    all_members = te.get_tweet_timeline(twitter.all_members_api, get_all_member_param)
-    all_members = json.loads(all_members)
-    get_all_users(all_members)
-
-    # get tweets by user
-    tweets_by_hilary_mason = te.get_tweet_timeline(twitter.user_timeline_api, user_timeline_params)
-    print(tweets_by_hilary_mason)
-    tweets_by_hilary_mason = json.loads(tweets_by_hilary_mason)
-    for _date in tweets_by_hilary_mason:
-        print(_date['created_at'])
-        print(_date)
-
-
-
-
-
+def update_member_list(conn, member_list, list_id):
+    cur = conn.cursor()
+    member_list = tuple(member_list)
+    try:
+        cur.execute('''update list_user_mapping
+                    set is_deleted = 't' and deleted_at = current_timestamp
+                    where list_id = %s and user_id not in %s and is_member = 'f' and (is_deleted is null or is_deleted = 'f')
+                        and (is_creator is null or is_creator = 'f') and (is_follower is null or is_follower = 'f')
+                    returning list_id, user_id;''', (list_id, member_list))
+        conn.commit()
+        members_deleted = cur.fetchall()
+        print('members are deleted: ', members_deleted)
+    except Exception as error:
+        print('Error - update_member_list: ', error)
+        conn.rollback()
+    finally:
+        cur.close()

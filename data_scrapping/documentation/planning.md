@@ -1,13 +1,13 @@
 ##### Working Processing
 
-##### 2020-10-27
-- commit project to git everyday
-- users table should be inserted from follower and following 
-
-- add is_deleted field for lists, users, tweets tables 
-    + add is_deleted field for tweets table
-
+##### 2020-10-28
+- commit project to git(working)
+- analysis data topic
+    + optimize extract data processes for tweet. At present, number of records > 3000 rows, reduce number of tweets store in database everyday. extract data run everyday and get all data for user/tweet/list with insert, update actions
 - define more measure fields for tweets and users: follower_counts, favorite_counts
+
+- users table should be inserted from follower and following
+- define when a user is deleted: follower and following(friend)
 
 * Tasks:
     - leaning python OOP
@@ -15,6 +15,15 @@
     - save scheduler information to database:
         + scheduler information
         + scheduler time for users, tweets, lists
+
+##### 2020-10-27
+- commit project to git (done) 
+
+- add is_deleted field for lists, users, tweets tables (done)    
+    + define when a list/user/tweet is deleted (done)
+        + member: get all members -> check if list in database is not exist in data extraction -> delete (done)
+        + list: get all lists -> check if list in database is not exist in data extraction -> delete (done)
+        + user: follower and following(friend) 
 
 ##### 2020-10-21
 - List working follow (done)

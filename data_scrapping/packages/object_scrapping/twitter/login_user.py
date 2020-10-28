@@ -9,11 +9,6 @@ class login_user(user):
                     _created_at=_created_at, _is_follower=_is_follower, _is_following=_is_following)
         self.all_list = dict()
     
-    def save_lists_to_database(self, conn):
-        super().save_lists_to_database(conn)
-    
-    def extract_all_lists(self):
-        super().extract_all_list()
 
     def extract_user_credential(self):
         all_information = tde.extract_data_from_api(twitter.account_verify_credential_api, _search_params='')
@@ -44,8 +39,3 @@ class login_user(user):
 
     def get_current_login_user_id(self):
         return self.id
-
-
-#  login_user 
-#   + extract information data
-#   + extract and store all lists to database
