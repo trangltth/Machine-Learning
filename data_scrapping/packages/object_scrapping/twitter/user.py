@@ -19,29 +19,6 @@ class user:
         self.created_at = _created_at
         self.is_follower = _is_follower
         self.is_following = _is_following   
-        self.all_lists = dict()
-        self.all_tweets = dict()
-
-    def save_tweet_to_database(self, conn):
-        for tweet in self.all_tweets:
-            t_tweet = tweet.tweet(_id = tweet['id'], _text = tweet['text'], _created_date = tweet['created_date'], _user_mentions = tweet['user_mentions'],
-                        _raw_data = tweet, _user_id=tweet['user_id'])
-            t_tweet.storeDatabase()
-
-    def extract_all_tweet(self):
-        all_tweets = tde.extract_data_from_api(twitter.filter_realtime_api, _search_params=params, _method='GET')
-        self.all_tweets = json.loads(all_tweets)
-
-    def save_lists_to_database(self, conn):
-        for _list in self.all_lists:
-            t_list = o_list.o_list(_list['id_str'], _list['name'], _list['subscriber_count'], _list['member_count'], _list['mode'], _list['description'], 
-            _list['following'], _list['created_at'], _list['uri'], _list['user']['id_str'], self.id, _list)     
-            t_list.storeDatabase(conn)  
-
-    def extract_all_list(self):
-        params = 'user_id=' + self.id 
-        all_lists = tde.extract_data_from_api(twitter.all_lists_api, _search_params=params, _method='GET')
-        self.all_lists = json.loads(all_lists)        
     
     def storeDatabase(self, conn):
         cur = conn.cursor()

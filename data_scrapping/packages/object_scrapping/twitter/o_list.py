@@ -23,16 +23,6 @@ class o_list:
         self.user_id = _user_id
         self.all_members = ''
 
-    def store_members_to_database(self, conn):
-        for member in self.all_members:
-            _user = user.user(_id=member['id_str'], _name=member['name'], _screen_name=member['screen_name'], _location=member['location'],
-                    _description=member['description'], _url=member['url'], _raw_data = member, _created_at=member['created_at'])
-            _user.storeDatabase(conn)
-    
-    def extract_all_members(self):
-        params = 'list_id=' + self.list_id
-        all_members = tde.extract_data_from_api(twitter.all_members_api, _search_params=params, _method='GET')
-        self.all_members = json.loads(all_members)
 
     def storeDatabase(self, conn):
         cur = conn.cursor()
