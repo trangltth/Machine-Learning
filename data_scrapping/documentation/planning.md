@@ -1,5 +1,22 @@
 ##### Working Processing
 
+#### tiwtter database setup (0.5 day)
+#### schedule draw data from twitter (0.5day)
+    - install R package
+    - install cairo
+        + depencies: libcairo2 - check which application is using - purpose: change version
+    - install pygobject
+    - install pygtk-2.24.0
+    - install gnome-schedule 
+#### python improvement (0.5 day)
+#### algorithm (0.5 day)
+#### postgres (0.5 day)
+#### basic statistics (1 day)
+#### data topic analysis (1 day)
+#### mongo db (1 day)
+#### covid news analysis (3 days) : draw data and analysis
+#### profolio website (4 days): research framework -> design -> code
+
 ##### 2020-10-27
 - commit project to git everyday
 - users table should be inserted from follower and following 
