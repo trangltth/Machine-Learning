@@ -1,6 +1,5 @@
 ##### Working Processing
 
-testttttttttt
 #### tiwtter database setup (0.5 day)
 #### schedule draw data from twitter (0.5day)
     - install R package
