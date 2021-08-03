@@ -1,6 +1,8 @@
 ##### Working Processing
 
-#### tiwtter database setup (0.5 day)
+#### database design project
+
+#### twitter database setup (0.5 day)
 #### schedule draw data from twitter (0.5day)
     - install R package
     - install cairo
@@ -12,7 +14,8 @@
 #### algorithm (0.5 day)
 #### postgres (0.5 day)
 #### basic statistics (1 day)
-#### data topic analysis (1 day)
+#### data topic analysis (1 day) - jupyter notebook
+#### data vizsualization web using R (2 days)
 #### mongo db (1 day)
 #### covid news analysis (3 days) : draw data and analysis
 #### profolio website (4 days): research framework -> design -> code
